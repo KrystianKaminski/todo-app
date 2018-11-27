@@ -73,6 +73,14 @@ class App extends React.Component {
     })
   }
 
+  handleCheck = task => {
+    task.completed = !task.completed
+    fetch(`${API_URL}/tasks/${task.id}.json`, {
+      method: 'PUT',
+      body: JSON.stringify(task)
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -94,7 +102,10 @@ class App extends React.Component {
              <ListItem
                key={task.id}
                primaryText={task.taskName}
-               leftCheckbox={<Checkbox />}
+               leftCheckbox={
+               <Checkbox
+                  onCheck={() => this.handleCheck(task)}
+                />}
                rightIconButton={
                  <IconButton>
                   <DeleteIcon
