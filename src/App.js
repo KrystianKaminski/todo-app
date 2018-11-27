@@ -21,7 +21,10 @@ class App extends React.Component {
     fetch(`${API_URL}/tasks.json`)
       .then(response => response.json())
       .then(data =>  {
-        console.log('Mam dane: ', data)
+        const array = Object.entries(data)
+        const tasksList = array.map(task => task[1])
+        
+        this.setState({ tasks: tasksList})
       })
   }
   handleClick = (event) => {
