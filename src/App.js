@@ -22,6 +22,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <AddTask/>
+        <div>
+          {this.state.tasks.map((task, index) => (
+            <div>{task.taskName}</div>
+          ))}
+        </div>
       </div>
     )
   }
