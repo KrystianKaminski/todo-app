@@ -21,8 +21,11 @@ class App extends React.Component {
     fetch(`${API_URL}/tasks.json`)
       .then(response => response.json())
       .then(data =>  {
-        const array = Object.entries(data)
-        const tasksList = array.map(task => task[1])
+        const array = Object.entries(data) // index 0 - klucze, index 1 - obiekty zadan
+        const tasksList = array.map(([id, values]) => {
+          values.id = id // stworzenie nowej właściwości w obiekcie zadania
+          return values
+        })
         
         this.setState({ tasks: tasksList})
       })
@@ -58,8 +61,8 @@ class App extends React.Component {
             onClick={this.handleClick}
             />
         <div>
-          {this.state.tasks.map((task, index) => (
-            <div>{task.taskName}</div>
+          {this.state.tasks.map(task => (
+            <div key={task.id}>{task.taskName}</div>
           ))}
         </div>
       </div>
