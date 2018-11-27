@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import {List, ListItem} from 'material-ui/List'
 import Checkbox from 'material-ui/Checkbox'
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import IconButton from 'material-ui/IconButton'
 
 const API_URL = 'https://krystian-kaminski.firebaseio.com/'
 
@@ -94,9 +95,13 @@ class App extends React.Component {
                key={task.id}
                primaryText={task.taskName}
                leftCheckbox={<Checkbox />}
-               rightIcon={<DeleteIcon
-                            onClick={() => this.handleDelete(task.id)} />}
-               />
+               rightIconButton={
+                 <IconButton>
+                  <DeleteIcon
+                    onClick={() => this.handleDelete(task.id)} />
+                  </IconButton>
+               }
+                />
            ))}
           </List>
         </div>
