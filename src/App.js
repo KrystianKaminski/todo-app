@@ -28,11 +28,12 @@ class App extends React.Component {
     if (this.state.taskName !== '') {
       let tasks = this.state.tasks
       const newTask = { taskName: this.state.taskName, completed: false}
-      tasks.push({ taskName: this.state.taskName, completed: false})
-      this.setState({ tasks, taskName: ''})
       fetch('https://krystian-kaminski.firebaseio.com/tasks.json', {
         method: 'POST',
         body: JSON.stringify(newTask)
+      }).then(() => {
+        tasks.push(newTask)
+        this.setState({ tasks, taskName: ''})
       })
     } else {
       alert(`You can't add empty value!`)
