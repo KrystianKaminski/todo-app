@@ -19,21 +19,25 @@ class App extends React.Component {
     this.setState({taskName: event.target.value})
   }
 
-  componentWillMount() {
+  loadData() {
     fetch(`${API_URL}/tasks.json`)
-      .then(response => response.json())
-      .then(data =>  {
-        if (!data) {
-          return
-        }
-        const array = Object.entries(data) // index 0 - klucze, index 1 - obiekty zadan
-        const tasksList = array.map(([id, values]) => {
-          values.id = id // stworzenie nowej właściwości w obiekcie zadania
-          return values
-        })
-        
-        this.setState({ tasks: tasksList})
+    .then(response => response.json())
+    .then(data =>  {
+      if (!data) {
+        this.setState({tasks: []})
+        return
+      }
+      const array = Object.entries(data) // index 0 - klucze, index 1 - obiekty zadan
+      const tasksList = array.map(([id, values]) => {
+        values.id = id // stworzenie nowej właściwości w obiekcie zadania
+        return values
       })
+      this.setState({ tasks: tasksList})
+    })
+  }
+
+  componentWillMount() {
+    this.loadData()
   }
   handleClick = () => {
     if (this.state.taskName !== '') {
@@ -62,6 +66,9 @@ class App extends React.Component {
   handleDelete = (id) => {
     fetch(`${API_URL}/tasks/${id}.json`, {
       method: 'DELETE'
+    })
+    .then(() => {
+      this.loadData()
     })
   }
 
