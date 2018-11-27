@@ -1,11 +1,11 @@
 {
-  "main.js": "/KrystianKaminski/todo-app/static/js/main.ddab3585.chunk.js",
-  "main.js.map": "/KrystianKaminski/todo-app/static/js/main.ddab3585.chunk.js.map",
-  "static/js/1.6e606b01.chunk.js": "/KrystianKaminski/todo-app/static/js/1.6e606b01.chunk.js",
-  "static/js/1.6e606b01.chunk.js.map": "/KrystianKaminski/todo-app/static/js/1.6e606b01.chunk.js.map",
-  "runtime~main.js": "/KrystianKaminski/todo-app/static/js/runtime~main.f2714f52.js",
-  "runtime~main.js.map": "/KrystianKaminski/todo-app/static/js/runtime~main.f2714f52.js.map",
-  "index.html": "/KrystianKaminski/todo-app/index.html",
-  "precache-manifest.b4a52d3cb2030545291de8f2b8800e75.js": "/KrystianKaminski/todo-app/precache-manifest.b4a52d3cb2030545291de8f2b8800e75.js",
-  "service-worker.js": "/KrystianKaminski/todo-app/service-worker.js"
+  "main.js": "/todo-app/static/js/main.ddab3585.chunk.js",
+  "main.js.map": "/todo-app/static/js/main.ddab3585.chunk.js.map",
+  "static/js/1.6e606b01.chunk.js": "/todo-app/static/js/1.6e606b01.chunk.js",
+  "static/js/1.6e606b01.chunk.js.map": "/todo-app/static/js/1.6e606b01.chunk.js.map",
+  "runtime~main.js": "/todo-app/static/js/runtime~main.84c007b1.js",
+  "runtime~main.js.map": "/todo-app/static/js/runtime~main.84c007b1.js.map",
+  "index.html": "/todo-app/index.html",
+  "precache-manifest.c1db39fe9cfc1e0a85d41fd6226aa8fc.js": "/todo-app/precache-manifest.c1db39fe9cfc1e0a85d41fd6226aa8fc.js",
+  "service-worker.js": "/todo-app/service-worker.js"
 }
