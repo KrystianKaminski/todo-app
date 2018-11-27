@@ -48,6 +48,12 @@ class App extends React.Component {
     }
   }
 
+  handleKeyDown = event => {
+    if (event.keyCode === 13) {
+      this.handleClick()
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -55,6 +61,7 @@ class App extends React.Component {
             hintText="Enter your task here"
             value={this.state.taskName}
             onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
             type="text"
         />
         <RaisedButton
