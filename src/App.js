@@ -2,7 +2,9 @@ import React from 'react';
 
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-
+import {List, ListItem} from 'material-ui/List'
+import Checkbox from 'material-ui/Checkbox'
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
 
 const API_URL = 'https://krystian-kaminski.firebaseio.com/'
 
@@ -21,6 +23,9 @@ class App extends React.Component {
     fetch(`${API_URL}/tasks.json`)
       .then(response => response.json())
       .then(data =>  {
+        if (!data) {
+          return
+        }
         const array = Object.entries(data) // index 0 - klucze, index 1 - obiekty zadan
         const tasksList = array.map(([id, values]) => {
           values.id = id // stworzenie nowej właściwości w obiekcie zadania
@@ -30,7 +35,7 @@ class App extends React.Component {
         this.setState({ tasks: tasksList})
       })
   }
-  handleClick = (event) => {
+  handleClick = () => {
     if (this.state.taskName !== '') {
       let tasks = this.state.tasks
       let newTask = { taskName: this.state.taskName, completed: false}
@@ -54,6 +59,12 @@ class App extends React.Component {
     }
   }
 
+  handleDelete = (id) => {
+    fetch(`${API_URL}/tasks/${id}.json`, {
+      method: 'DELETE'
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -70,9 +81,17 @@ class App extends React.Component {
             onClick={this.handleClick}
             />
         <div>
-          {this.state.tasks.map(task => (
-            <div key={task.id}>{task.taskName}</div>
-          ))}
+           <List>
+           {this.state.tasks.map(task => (
+             <ListItem
+               key={task.id}
+               primaryText={task.taskName}
+               leftCheckbox={<Checkbox />}
+               rightIcon={<DeleteIcon
+                            onClick={() => this.handleDelete(task.id)} />}
+               />
+           ))}
+          </List>
         </div>
       </div>
     )
