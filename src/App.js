@@ -25,15 +25,21 @@ class App extends React.Component {
   }
 
   handleClick = (event) => {
-    let tasks = this.state.tasks
-    tasks.push({ taskName: this.state.taskName, completed: false})
-    this.setState({ tasks: tasks})
+    if (this.state.taskName !== '') {
+      let tasks = this.state.tasks
+      tasks.push({ taskName: this.state.taskName, completed: false})
+      this.setState({ tasks, taskName: ''})
+    } else {
+      alert(`You can't add empty value!`)
+    }
   }
 
   render() {
     return (
       <div className="App">
         <TextField
+            hintText="Enter your task here"
+            value={this.state.taskName}
             onChange={this.handleChange}
             type="text"
         />
