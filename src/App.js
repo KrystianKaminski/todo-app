@@ -33,14 +33,16 @@ class App extends React.Component {
   handleClick = (event) => {
     if (this.state.taskName !== '') {
       let tasks = this.state.tasks
-      const newTask = { taskName: this.state.taskName, completed: false}
+      let newTask = { taskName: this.state.taskName, completed: false}
       fetch(`${API_URL}/tasks.json`, {
         method: 'POST',
         body: JSON.stringify(newTask)
-      }).then(() => {
-        tasks.push(newTask)
-        this.setState({ tasks, taskName: ''})
-      })
+      }).then(response => response.json())
+        .then(data => {
+          newTask.id = data.name
+          tasks.push(newTask)
+          this.setState({tasks,taskName: ''})
+        })
     } else {
       alert(`You can't add empty value!`)
     }
