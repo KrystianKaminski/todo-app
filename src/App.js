@@ -4,19 +4,12 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
 
+const API_URL = 'https://krystian-kaminski.firebaseio.com/'
+
 class App extends React.Component {
 
   state = {
-    tasks: [
-      {
-        taskName: 'Odkurzanie',
-        completed: false
-    },
-      {
-        taskName: 'Nakarmić kota',
-        completed: false
-    }
-    ],
+    tasks: [],
     taskName: ''
   }
 
@@ -24,11 +17,18 @@ class App extends React.Component {
     this.setState({taskName: event.target.value})
   }
 
+  componentWillMount() {
+    fetch(`${API_URL}/tasks.json`)
+      .then(response => response.json())
+      .then(data =>  {
+        console.log('Mam dane: ', data)
+      })
+  }
   handleClick = (event) => {
     if (this.state.taskName !== '') {
       let tasks = this.state.tasks
       const newTask = { taskName: this.state.taskName, completed: false}
-      fetch('https://krystian-kaminski.firebaseio.com/tasks.json', {
+      fetch(`${API_URL}/tasks.json`, {
         method: 'POST',
         body: JSON.stringify(newTask)
       }).then(() => {
